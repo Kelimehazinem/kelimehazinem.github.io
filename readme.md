@@ -30,7 +30,7 @@ Platform, **ücretsiz çevrim içi dersler** ile öğrencilere aktif bir öğren
 
 Bu zengin içerikler sayesinde öğrenciler hem eğlenerek öğrenme fırsatı bulur hem de kültürel ve akademik gelişimlerini destekleyici etkinliklere katılabilirler.  
 
-👉 Daha fazla bilgi için: [Ülkem Yanımda](ulkemyanimda.eba.gov.tr)  
+👉 Daha fazla bilgi için: [Ülkem Yanımda](https://ulkemyanimda.eba.gov.tr/)  
 
 ---
 
