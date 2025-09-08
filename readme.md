@@ -43,7 +43,7 @@ Orijinal basılı kaynak:
 
 ## 🙏 Teşekkür
 Projenin hazırlanması sürecindeki katkıları ve emekleri için:  
-- **Edibe YILMAZ**  
+- [**Edibe YILMAZ**](https://edibeselvi.github.io/)  
 - [**Zeynep Gizem EMİR SHAHBAZOV**](https://gizemshahbazova.github.io/)
 
 Ve dijitalleştirme sürecini mümkün kılan **Ülkem Yanımda Projesi’ne** teşekkür ederiz.  
