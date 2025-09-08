@@ -11,7 +11,26 @@ kitabından yararlanılarak hazırlanmış **dijital sözlük** uygulamasıdır.
 ## 🎯 Projenin Amacı
 - Türkçeyi yabancı dil olarak öğrenen 6–12 yaş grubu çocuklara görsel destekli sözlük sunmak.  
 - Eğitimciler, öğrenciler ve aileler için erişilebilir bir kaynak oluşturmak.  
-- "Ülkem Yanımda Projesi" kapsamında dijital erişim kolaylığı sağlamak.  
+- **“Ülkem Yanımda Projesi” kapsamında sözlüğü dijital hale getirerek** öğrenme sürecini daha kolay, erişilebilir ve sürdürülebilir kılmak.  
+
+---
+
+## 🌍 Ülkem Yanımda Projesi
+Bu dijital sözlük, **“Ülkem Yanımda Projesi”** çatısı altında geliştirilmiştir.  
+
+**Ülkem Yanımda**, yurt dışında yaşayan **5–16 yaş arası Türk soylu çocuklara** Türkçe ve Türk kültürünü öğretmeyi amaçlayan yenilikçi bir dijital eğitim platformudur.  
+Platform, **ücretsiz çevrim içi dersler** ile öğrencilere aktif bir öğrenme ortamı sunar. Uzman öğretmenler eşliğinde gerçekleştirilen derslerde öğrenciler, Türkçe dil becerilerini geliştirirken aynı zamanda **kültürel mirasımızla** da yakından tanışma fırsatı bulurlar.  
+
+### Ülkem Yanımda’da Neler Var?
+- Canlı dersler  
+- Ders kitapları ve sesli kitaplar  
+- Eğitici videolar ve müzikler  
+- İnteraktif oyunlar  
+- Yıl boyunca düzenlenen **ödüllü yarışmalar**  
+
+Bu zengin içerikler sayesinde öğrenciler hem eğlenerek öğrenme fırsatı bulur hem de kültürel ve akademik gelişimlerini destekleyici etkinliklere katılabilirler.  
+
+👉 Daha fazla bilgi için: [Ülkem Yanımda](ulkemyanimda.eba.gov.tr)  
 
 ---
 
@@ -23,10 +42,11 @@ Orijinal basılı kaynak:
 ---
 
 ## 🙏 Teşekkür
-Projenin hazırlanması sürecindeki insanüstü gayretleri için:  
+Projenin hazırlanması sürecindeki katkıları ve emekleri için:  
 - **Edibe YILMAZ**  
 - **Zeynep Gizem EMİR SHAHBAZOV**  
 
+Ve dijitalleştirme sürecini mümkün kılan **Ülkem Yanımda Projesi’ne** teşekkür ederiz.  
 
 ---
 
