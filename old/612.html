@@ -7,35 +7,9 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400&display=swap');
         body { font-family: 'Roboto', sans-serif; background-color: #f0f2f5; color: #333; margin: 0; padding: 20px; }
-        .search-container { text-align: center; margin-bottom: 30px; padding: 10px; display: flex; justify-content: center; align-items: center; gap: 15px; flex-wrap: wrap; }
+        .search-container { text-align: center; margin-bottom: 30px; padding: 10px; }
         #searchInput { width: 50%; max-width: 500px; padding: 15px 25px; font-size: 1.1em; border-radius: 30px; border: 1px solid #ddd; box-shadow: 0 4px 8px rgba(0,0,0,0.05); transition: all 0.3s ease-in-out; }
         #searchInput:focus { outline: none; border-color: #007bff; box-shadow: 0 4px 12px rgba(0,123,255,0.2); }
-        .btn-home, .btn-refresh {
-            padding: 12px 20px;
-            border: none;
-            border-radius: 30px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.2s;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 1em;
-        }
-        .btn-home {
-            background-color: #6c757d;
-            color: white;
-        }
-        .btn-home:hover {
-            background-color: #5a6268;
-        }
-        .btn-refresh {
-            background-color: #17a2b8;
-            color: white;
-        }
-        .btn-refresh:hover {
-            background-color: #138496;
-        }
         .container { display: flex; flex-wrap: wrap; justify-content: center; gap: 25px; }
         .card { background-color: #ffffff; border-radius: 12px; box-shadow: 0 6px 12px rgba(0,0,0,0.1); overflow: hidden; width: 410px; transition: transform 0.2s ease-in-out; display: none; }
         .card:hover { transform: translateY(-5px); }
@@ -96,27 +70,15 @@
     </style>
 </head>
 <body>
-    <!-- Ana Sayfa Butonu     <div style="text-align: center; margin-bottom: 20px;">
-
-    </div>-->
-
-
-    <!-- Arama ve Yenile Butonu -->
     <div class="search-container">
         <input type="text" id="searchInput" placeholder="Kartlar içinde kelime ara...">
-        <button class="btn-refresh" onclick="showRandomCards(10)">
-            🔄 Kelimeleri Yenile
-        </button>
-		
-		        <button class="btn-home" onclick="window.location.href='https://kelimehazinem.github.io/'">
-            🏠 Ana Sayfa
-        </button>
     </div>
 
     <div id="info">Şu an rastgele 10 kart gösteriliyor.</div>
 
-    <div class="container">
-  <div class="container">   <div class="card">
+  
+  <div class="container">
+   <div class="card">
     <img alt="abi" height="349" src="imgs/baba.png" width="410"/>
     <div class="card-content">
      <h2 class="word">
@@ -35105,46 +35067,6 @@ yüzümü yıkarım."
    </div>
   </div>
 
-
-
-
-		<footer id="main-footer" style="display: none; padding: 30px 20px; text-align: center; font-family: 'Comic Sans MS', cursive, sans-serif; color: #333; z-index: 5;  margin-top: 20px;">
-    <div style="margin-bottom: 20px;">
-        <div style="display: flex; justify-content: center; align-items: center; gap: 30px; flex-wrap: wrap;">
-            <a href="https://yyegm.meb.gov.tr/" target="_blank" style="transition: transform 0.3s ease;">
-                <img src="imgs/logo2.png" alt="MEB Logo" style="height: 60px; width: auto; border-radius: 8px;">
-            </a>
-            <a href="https://ulkemyanimda.github.io/" target="_blank" style="transition: transform 0.3s ease;">
-                <img src="imgs/logo1.png" alt="Ülkem Yanımda Logo" style="height: 60px; width: auto; border-radius: 8px;">
-            </a>
-        </div>
-    </div>
-
-    <!-- Sosyal Medya İkonları (sade, beyaz arka plana uygun) -->
-    <div style="margin: 20px 0; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
-        <a href="https://www.instagram.com/ulkemyanimda" target="_blank" style="display: inline-block; transition: transform 0.3s ease;">
-            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/instagram.svg" alt="Instagram" style="height: 36px; width: 36px; filter: none; /* Renkli kalsın */">
-        </a>
-        <a href="https://twitter.com/ulkemyanimda" target="_blank" style="display: inline-block; transition: transform 0.3s ease;">
-            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/x.svg" alt="Twitter" style="height: 36px; width: 36px; filter: none;">
-        </a>
-        <a href="https://www.facebook.com/ulkemyanimda" target="_blank" style="display: inline-block; transition: transform 0.3s ease;">
-            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/facebook.svg" alt="Facebook" style="height: 36px; width: 36px; filter: none;">
-        </a>
-        <a href="https://www.youtube.com/@ulkem_yanimda" target="_blank" style="display: inline-block; transition: transform 0.3s ease;">
-            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/youtube.svg" alt="YouTube" style="height: 36px; width: 36px; filter: none;">
-        </a>
-    </div>
-
-    <div>
-        <p style="margin: 0; font-size: 16px; font-weight: bold; color: #555;">© 2025 ÜLKEM YANIMDA!</p>
-    </div>
-</footer>
-
-
-
-
-
     <script>
         // Kelimeyi seslendir
         function speakWord(word) {
@@ -35165,16 +35087,20 @@ yüzümü yıkarım."
 
         // Sonucu göster
         function showResult(targetWord, message, type, button) {
+            // Butonun bağlı olduğu kartı bul
             const cardContent = button.closest('.card-content');
             const resultContainer = cardContent.querySelector('.result-container');
             
+            // Önceki sonuçları temizle
             resultContainer.innerHTML = '';
             
+            // Yeni sonuç ekle
             const resultDiv = document.createElement('div');
             resultDiv.className = `result ${type}`;
             resultDiv.textContent = message;
             resultContainer.appendChild(resultDiv);
             
+            // 5 saniye sonra kaybolması için (isteğe bağlı)
             setTimeout(() => {
                 resultDiv.style.opacity = '0';
                 setTimeout(() => {
@@ -35259,26 +35185,23 @@ yüzümü yıkarım."
                 });
         }
 
-        // Rastgele N kart gösterme fonksiyonu (GLOBAL OLARAK ERİŞİLEBİLİR YAPILDI)
-        function showRandomCards(count = 10) {
-            const cards = Array.from(document.querySelectorAll('.card'));
-            const infoDiv = document.getElementById('info');
-
-            cards.forEach(card => card.style.display = 'none');
-            
-            const shuffled = [...cards].sort(() => 0.5 - Math.random());
-            const selected = shuffled.slice(0, Math.min(count, cards.length));
-            
-            selected.forEach(card => card.style.display = 'block');
-            
-            infoDiv.textContent = `Şu an rastgele ${selected.length} kart gösteriliyor.`;
-        }
-
         // Sayfa yüklendiğinde çalışacak ana fonksiyon
         document.addEventListener('DOMContentLoaded', function() {
             const searchInput = document.getElementById('searchInput');
-            const cards = Array.from(document.querySelectorAll('.card'));
+            const cards = Array.from(document.querySelectorAll('.card')); // NodeList → Array
             const infoDiv = document.getElementById('info');
+
+            // Rastgele N kart gösterme fonksiyonu
+            function showRandomCards(count = 10) {
+                cards.forEach(card => card.style.display = 'none');
+                
+                const shuffled = [...cards].sort(() => 0.5 - Math.random());
+                const selected = shuffled.slice(0, Math.min(count, cards.length));
+                
+                selected.forEach(card => card.style.display = 'block');
+                
+                infoDiv.textContent = `Şu an rastgele ${selected.length} kart gösteriliyor.`;
+            }
 
             // Sayfa yüklendiğinde rastgele 10 kart göster
             showRandomCards(10);
@@ -35312,46 +35235,5 @@ yüzümü yıkarım."
             });
         });
     </script>
-	
-	
-	
-
-		
-	
-	
-	
 </body>
-
-		<footer id="main-footer" style="display: none; padding: 30px 20px; text-align: center; font-family: 'Comic Sans MS', cursive, sans-serif; color: #333; z-index: 5;  margin-top: 20px;">
-    <div style="margin-bottom: 20px;">
-        <div style="display: flex; justify-content: center; align-items: center; gap: 30px; flex-wrap: wrap;">
-            <a href="https://yyegm.meb.gov.tr/" target="_blank" style="transition: transform 0.3s ease;">
-                <img src="imgs/logo2.png" alt="MEB Logo" style="height: 60px; width: auto; border-radius: 8px;">
-            </a>
-            <a href="https://ulkemyanimda.github.io/" target="_blank" style="transition: transform 0.3s ease;">
-                <img src="imgs/logo1.png" alt="Ülkem Yanımda Logo" style="height: 60px; width: auto; border-radius: 8px;">
-            </a>
-        </div>
-    </div>
-
-    <!-- Sosyal Medya İkonları (sade, beyaz arka plana uygun) -->
-    <div style="margin: 20px 0; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
-        <a href="https://www.instagram.com/ulkemyanimda" target="_blank" style="display: inline-block; transition: transform 0.3s ease;">
-            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/instagram.svg" alt="Instagram" style="height: 36px; width: 36px; filter: none; /* Renkli kalsın */">
-        </a>
-        <a href="https://twitter.com/ulkemyanimda" target="_blank" style="display: inline-block; transition: transform 0.3s ease;">
-            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/x.svg" alt="Twitter" style="height: 36px; width: 36px; filter: none;">
-        </a>
-        <a href="https://www.facebook.com/ulkemyanimda" target="_blank" style="display: inline-block; transition: transform 0.3s ease;">
-            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/facebook.svg" alt="Facebook" style="height: 36px; width: 36px; filter: none;">
-        </a>
-        <a href="https://www.youtube.com/@ulkem_yanimda" target="_blank" style="display: inline-block; transition: transform 0.3s ease;">
-            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/youtube.svg" alt="YouTube" style="height: 36px; width: 36px; filter: none;">
-        </a>
-    </div>
-
-    <div>
-        <p style="margin: 0; font-size: 16px; font-weight: bold; color: #555;">© 2025 ÜLKEM YANIMDA!</p>
-    </div>
-</footer>
 </html>
