@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Video Quiz</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(45deg, #2196F3, #1976D2);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .video-container {
+            position: relative;
+            padding: 20px;
+            background: #f8f9fa;
+        }
+
+        #player {
+            width: 100%;
+            height: 400px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .quiz-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            max-width: 500px;
+            width: 90%;
+            display: none;
+            z-index: 1000;
+            border: 3px solid #2196F3;
+        }
+
+        .quiz-question {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .option-button {
+            padding: 15px 20px;
+            border: 2px solid #e0e0e0;
+            background: #f5f5f5;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 16px;
+            text-align: left;
+        }
+
+        .option-button:hover {
+            background: #e3f2fd;
+            border-color: #2196F3;
+            transform: translateY(-2px);
+        }
+
+        .option-button.correct {
+            background: #4caf50;
+            color: white;
+            border-color: #4caf50;
+        }
+
+        .option-button.incorrect {
+            background: #f44336;
+            color: white;
+            border-color: #f44336;
+        }
+
+        .quiz-feedback {
+            text-align: center;
+            margin: 15px 0;
+            font-weight: bold;
+            min-height: 20px;
+        }
+
+        .continue-button {
+            background: linear-gradient(45deg, #4caf50, #45a049);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            display: block;
+            margin: 20px auto 0;
+            transition: all 0.3s ease;
+        }
+
+        .continue-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
+        }
+
+        .progress-bar {
+            background: #e0e0e0;
+            height: 6px;
+            border-radius: 3px;
+            margin: 20px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(45deg, #4caf50, #45a049);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .stats {
+            padding: 20px;
+            background: #f8f9fa;
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .stat-item {
+            flex: 1;
+        }
+
+        .stat-number {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2196F3;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .time-display {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 14px;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                margin: 10px;
+                border-radius: 10px;
+            }
+            
+            .quiz-overlay {
+                padding: 20px;
+                width: 85%;
+            }
+            
+            #player {
+                height: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📚 Interaktif Video Quiz</h1>
+            <p>Video izlerken bilginizi test edin!</p>
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+
+        <div class="video-container">
+            <div id="player"></div>
+            <div class="time-display" id="timeDisplay">00:00</div>
+            
+            <div class="quiz-overlay" id="quizOverlay">
+                <div class="quiz-question" id="quizQuestion"></div>
+                <div class="quiz-options" id="quizOptions"></div>
+                <div class="quiz-feedback" id="quizFeedback"></div>
+                <button class="continue-button" id="continueButton" onclick="continueVideo()">Devam Et</button>
+            </div>
+        </div>
+
+        <div class="stats">
+            <div class="stat-item">
+                <div class="stat-number" id="correctCount">0</div>
+                <div class="stat-label">Doğru Cevap</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" id="totalQuestions">5</div>
+                <div class="stat-label">Toplam Soru</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" id="accuracyRate">0%</div>
+                <div class="stat-label">Başarı Oranı</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // YouTube API'sini yükle
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        var player;
+        var currentQuestionIndex = 0;
+        var correctAnswers = 0;
+        var questionAnswered = false;
+
+        // Video ID'sini URL'den çıkar
+        function getVideoId(url) {
+            const regex = /(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&\n?#]+)/;
+            const match = url.match(regex);
+            return match ? match[1] : null;
+        }
+		
+		// Segment: 5. dk - 15. dk (300 - 900 saniye)
+const watchSegments = [
+    { start: 300, end: 900 }
+];
+
+
+        /* Sorular ve cevapları tanımla (zamanlar saniye cinsinden)
+        const quizQuestions = [
+            {
+                time: 600, // 10. dakika (600 saniye)
+                question: "Bu videoda hangi konu ele alınıyor?",
+                options: [
+                    "Teknoloji ve gelecek",
+                    "Doğa ve çevre",
+                    "Spor ve sağlık",
+                    "Sanat ve kültür"
+                ],
+                correct: 0,
+                explanation: "Video teknoloji ve gelecek konularını ele alıyor."
+            },
+            {
+                time: 1200, // 20. dakika
+                question: "Videoda bahsedilen ana nokta nedir?",
+                options: [
+                    "Geçmişteki olaylar",
+                    "Güncel gelişmeler",
+                    "Gelecek öngörüleri",
+                    "Hepsi"
+                ],
+                correct: 3,
+                explanation: "Video hem geçmişi hem günümüzü hem de geleceği kapsıyor."
+            },
+            {
+                time: 1500, // 25. dakika
+                question: "Bu konuyla ilgili önemli olan faktör nedir?",
+                options: [
+                    "Zaman yönetimi",
+                    "Kaynak kullanımı",
+                    "İnsan faktörü",
+                    "Tümü önemli"
+                ],
+                correct: 3,
+                explanation: "Tüm faktörler birlikte önemlidir."
+            },
+            {
+                time: 1800, // 30. dakika
+                question: "Videoda verilen örneklerden çıkarılan sonuç nedir?",
+                options: [
+                    "Basit çözümler yeterli",
+                    "Karmaşık yaklaşım gerekli",
+                    "Dengeli bir yaklaşım şart",
+                    "Kesin bir cevap yok"
+                ],
+                correct: 2,
+                explanation: "Dengeli yaklaşım en etkili çözümdür."
+            },
+            {
+                time: 1920, // 32. dakika
+                question: "Videonun ana mesajı nedir?",
+                options: [
+                    "Sürekli öğrenmeye devam et",
+                    "Geçmişten ders al",
+                    "Geleceği planla",
+                    "Tüm seçenekler doğru"
+                ],
+                correct: 3,
+                explanation: "Video tüm bu mesajları içermektedir."
+            }
+        ];*/
+		
+		
+const quizQuestions = [
+    {
+        time: 170, // 3. dakika (180 saniye)
+        question: "Aşağıdaki malzemelerle yapabileceğiniz Bursa yemeği hangisidir?\n\n" +
+                  "- 500 gr kıyma\n" +
+                  "- 3 adet kebaplık pide\n" +
+                  "- 250 gr tereyağı\n" +
+                  "- 250 gr yoğurt\n" +
+                  "- 1 çay kaşığı kimyon\n" +
+                  "- 1 çay kaşığı karabiber\n" +
+                  "- 1 çay kaşığı tuz\n" +
+                  "- 1 yemek kaşığı domates salçası\n",
+        options: [
+            "İskender Kebabı",
+            "Kestane Şekeri",
+            "Pideli Kebap",
+            "Zeytinyağlı Enginar"
+        ],
+        correct: 2,
+        explanation: "Bu malzemelerle yapılan ünlü Bursa yemeği Pideli Kebap’tır."
+    }
+]
+
+
+        // YouTube Player hazır olduğunda
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('player', {
+                height: '400',
+                width: '100%',
+                videoId: getVideoId('https://www.youtube.com/watch?v=56GWnfbgAgk'),
+                playerVars: {
+                    'playsinline': 1,
+                    'rel': 0,
+                    'modestbranding': 1
+                },
+                events: {
+                    'onReady': onPlayerReady,
+                    'onStateChange': onPlayerStateChange
+                }
+            });
+        }
+
+        function onPlayerReady(event) {
+            updateProgress();
+            startTimeUpdate();
+        }
+
+        function onPlayerStateChange(event) {
+            if (event.data == YT.PlayerState.PLAYING) {
+                checkForQuestions();
+            }
+        }
+
+        // Zaman güncelleme
+        function startTimeUpdate() {
+            setInterval(() => {
+                if (player && player.getCurrentTime) {
+                    updateTimeDisplay();
+                    updateProgress();
+                    if (player.getPlayerState() === YT.PlayerState.PLAYING) {
+                        checkForQuestions();
+                    }
+                }
+            }, 1000);
+        }
+
+        function updateTimeDisplay() {
+            const currentTime = Math.floor(player.getCurrentTime());
+            const minutes = Math.floor(currentTime / 60);
+            const seconds = currentTime % 60;
+            document.getElementById('timeDisplay').textContent = 
+                `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            
+            // Segment bilgisini güncelle
+            updateSegmentTimer();
+        }
+
+        function updateSegmentTimer() {
+            const segmentTimer = document.getElementById('segmentTimer');
+            if (currentSegmentIndex < watchSegments.length) {
+                const currentTime = Math.floor(player.getCurrentTime());
+                const segment = watchSegments[currentSegmentIndex];
+                const remaining = segment.end - currentTime;
+                
+                if (remaining > 0) {
+                    segmentTimer.textContent = `Segment ${currentSegmentIndex + 1} - ${Math.floor(remaining/60)}:${(remaining%60).toString().padStart(2,'0')} kaldı`;
+                } else {
+                    segmentTimer.textContent = `Segment ${currentSegmentIndex + 1}`;
+                }
+            } else {
+                segmentTimer.textContent = 'Tamamlandı ✅';
+            }
+        }
+
+        function updateProgress() {
+            if (player && player.getDuration) {
+                const duration = player.getDuration();
+                const currentTime = player.getCurrentTime();
+                const progress = (currentTime / duration) * 100;
+                document.getElementById('progressFill').style.width = progress + '%';
+            }
+        }
+
+        // Soruları kontrol et
+        function checkForQuestions() {
+            if (currentQuestionIndex >= quizQuestions.length) return;
+
+            const currentTime = Math.floor(player.getCurrentTime());
+            const question = quizQuestions[currentQuestionIndex];
+
+            if (currentTime >= question.time && !questionAnswered) {
+                showQuestion(question);
+                player.pauseVideo();
+            }
+        }
+
+        // Soruyu göster
+        function showQuestion(question) {
+            questionAnswered = true;
+            const overlay = document.getElementById('quizOverlay');
+            const questionEl = document.getElementById('quizQuestion');
+            const optionsEl = document.getElementById('quizOptions');
+            const feedbackEl = document.getElementById('quizFeedback');
+            const continueBtn = document.getElementById('continueButton');
+
+            questionEl.textContent = question.question;
+            feedbackEl.textContent = '';
+            continueBtn.style.display = 'none';
+
+            optionsEl.innerHTML = '';
+            question.options.forEach((option, index) => {
+                const button = document.createElement('button');
+                button.className = 'option-button';
+                button.textContent = `${String.fromCharCode(65 + index)}. ${option}`;
+                button.onclick = () => selectAnswer(index, question);
+                optionsEl.appendChild(button);
+            });
+
+            overlay.style.display = 'block';
+        }
+
+        // Cevap seç
+        function selectAnswer(selectedIndex, question) {
+            const options = document.querySelectorAll('.option-button');
+            const feedbackEl = document.getElementById('quizFeedback');
+            const continueBtn = document.getElementById('continueButton');
+
+            options.forEach((option, index) => {
+                option.onclick = null;
+                if (index === question.correct) {
+                    option.classList.add('correct');
+                } else if (index === selectedIndex && index !== question.correct) {
+                    option.classList.add('incorrect');
+                }
+            });
+
+            if (selectedIndex === question.correct) {
+                correctAnswers++;
+                feedbackEl.innerHTML = `<span style="color: #4caf50;">✅ Doğru!</span><br>${question.explanation}`;
+            } else {
+                feedbackEl.innerHTML = `<span style="color: #f44336;">❌ Yanlış!</span><br>${question.explanation}`;
+            }
+
+            updateStats();
+            continueBtn.style.display = 'block';
+        }
+
+        // Videoyu devam ettir
+        function continueVideo() {
+            document.getElementById('quizOverlay').style.display = 'none';
+            currentQuestionIndex++;
+            questionAnswered = false;
+            player.playVideo();
+        }
+
+        // İstatistikleri güncelle
+        function updateStats() {
+            document.getElementById('correctCount').textContent = correctAnswers;
+            const accuracy = Math.round((correctAnswers / (currentQuestionIndex + 1)) * 100);
+            document.getElementById('accuracyRate').textContent = accuracy + '%';
+        }
+    </script>
+</body>
+</html>
