@@ -21,10 +21,10 @@
 
         .container {
             max-width: 1200px;
-            width: 80%;
+            width: 90%;
             background: rgba(255, 255, 255, 0.1);
             border-radius: 20px;
-            padding: 00px;
+            padding: 20px;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.2);
@@ -34,45 +34,45 @@
             text-align: center;
             color: white;
             margin-bottom: 20px;
-            font-size: 2.5em;
+            font-size: 2.2em;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
         }
 
         .instructions {
             text-align: center;
             color: white;
-            margin-bottom: 30px;
-            font-size: 1.2em;
+            margin-bottom: 20px;
+            font-size: 1em;
             background: rgba(255, 255, 255, 0.1);
-            padding: 15px;
+            padding: 10px;
             border-radius: 10px;
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
-/* =================================
-   HARİTA CONTAINER STİLLERİ
-================================= */
-.map-container {
-    position: relative;
-    /* display: inline-block; */ /* Bu satırı yoruma alabilir veya kaldırabilirsiniz */
-    border-radius: 15px;
-    overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    background: white;
-    padding: 20px;
-    /* margin: 0 auto; */ /* Bu satırı da kaldırabiliriz, map-image için yapacağız */
-    display: block; /* map-container'ın block element olması önemli */
-    text-align: center; /* İçindeki inline-block veya block elementleri ortalamak için */
-}
+        /* =================================
+           HARİTA CONTAINER STİLLERİ
+        ================================= */
+        .map-container {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            background: white;
+            padding: 15px;
+            display: block;
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto;
+        }
 
-.map-image {
-    width: 70%; /* Haritanızın kapladığı alanı geri 70% olarak ayarladım, çünkü ortalamak istiyorsunuz */
-    max-width: 100%; /* Emin olmak için */
-    height: auto;
-    display: block; /* Ortalamak için block element olmalı */
-    margin: 0 auto; /* Yatayda ortalamak için */
-    border-radius: 10px;
-}
+        .map-image {
+            width: 100%;       /* Mobilde tam genişlik */
+            max-width: 700px;  /* Masaüstünde aşırı büyümesin */
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            border-radius: 10px;
+        }
 
         /* =================================
            QUIZ NOKTALARI - TEMEL STİLLER
@@ -137,10 +137,10 @@
             position: absolute;
             background: rgba(0, 0, 0, 0.8);
             color: white;
-            padding: 8px 12px;
+            padding: 6px 10px;
             border-radius: 6px;
-            font-size: 14px;
-            top: -40px;
+            font-size: 12px;
+            top: -35px;
             left: 50%;
             transform: translateX(-50%);
             opacity: 0;
@@ -177,7 +177,7 @@
 
         .modal-content {
             background: white;
-            padding: 30px;
+            padding: 20px;
             border-radius: 15px;
             text-align: center;
             max-width: 500px;
@@ -185,20 +185,20 @@
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
         }
 
-        .modal-content h2 { color: #333; margin-bottom: 20px; }
-        .modal-content p { color: #666; margin-bottom: 25px; line-height: 1.6; }
-        .modal-buttons { display: flex; gap: 15px; justify-content: center; }
+        .modal-content h2 { color: #333; margin-bottom: 15px; font-size: 1.4em; }
+        .modal-content p { color: #666; margin-bottom: 20px; line-height: 1.5; font-size: 0.95em; }
+        .modal-buttons { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
 
         .btn {
-            padding: 12px 25px;
+            padding: 10px 20px;
             border: none;
             border-radius: 8px;
             cursor: pointer;
             font-weight: bold;
             transition: all 0.3s ease;
-            font-size: 16px;
-            text-decoration: none; /* Link olan butonlar için alt çizgiyi kaldır */
-            display: inline-block; /* Link olan butonların düzgün görünmesi için */
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
         }
         .btn-primary {
             background: linear-gradient(45deg, #667eea, #764ba2);
@@ -209,25 +209,30 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
         
-        /* YENİ: İkincil buton stili eklendi */
         .btn-secondary {
             background: #f8f9fa;
             color: #666;
             border: 1px solid #ddd;
         }
-
-        .btn-secondary:hover {
-            background: #e9ecef;
-        }
+        .btn-secondary:hover { background: #e9ecef; }
 
         /* =================================
            RESPONSİVE TASARIM
         ================================= */
         @media (max-width: 768px) {
-            .container { padding: 20px; }
-            h1 { font-size: 2em; }
-            .quiz-point { width: 60px; height: 60px; }
-            .quiz-point-icon { width: 35px; height: 35px; }
+            h1 { font-size: 1.8em; }
+            .instructions { font-size: 0.9em; }
+            .quiz-point { width: 55px; height: 55px; }
+            .quiz-point-icon { width: 60px; height: 60px; }
+            .tooltip { font-size: 11px; top: -30px; }
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 1.5em; }
+            .quiz-point { width: 45px; height: 45px; }
+            .quiz-point-icon { width: 45px; height: 45px; }
+            .instructions { font-size: 0.85em; padding: 8px; }
+            .modal-content { padding: 15px; }
         }
     </style>
 </head>
@@ -301,7 +306,8 @@
             </div>
         </div>
     </div>
-    
+	
+	
     <script>
         // Gerekli HTML elementlerini seçiyoruz
         const quizPoints = document.querySelectorAll('.quiz-point');
@@ -351,5 +357,13 @@
             }
         });
     </script>
+	
+	
+	
+	
+	
+	
+	
+	
 </body>
 </html>
