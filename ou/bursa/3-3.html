@@ -17,7 +17,7 @@
       color: white;
     }
 
-    h1 {
+    h1, h2 {
       text-align: center;
       margin-bottom: 30px;
       text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
@@ -64,6 +64,22 @@
       align-items: center;
     }
 
+    /* --- YENİ EKLENEN STİL --- */
+    #image-source-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      padding: 20px;
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 12px;
+      width: 100%;
+      max-width: 850px;
+      margin-bottom: 30px;
+      min-height: 120px; /* Boşken çökmesin diye */
+    }
+
     .drop-zones {
       display: flex;
       gap: 10px;
@@ -95,25 +111,31 @@
     }
 
     .draggable {
-      position: absolute;
-      width: 160px;           /* Sabit ve kontrollü boyut */
-      max-width: 160px;       /* Taşmayı engelle */
+      position: relative; /* MUTLAK KONUMDAN DEĞİŞTİRİLDİ */
+      width: 160px;
+      max-width: 160px;
       aspect-ratio: 16/9;
       border-radius: 8px;
       cursor: grab;
       box-shadow: 0 4px 12px rgba(0,0,0,0.3);
       transition: transform 0.2s;
       z-index: 10;
-      transform: none;        /* Başlangıçta sıfırla */
     }
 
     .draggable:hover {
-      transform: scale(1.02); /* Daha hafif büyüme */
+      transform: scale(1.05);
       z-index: 20;
     }
 
     .draggable.dragging {
-      opacity: 0.8;
+      opacity: 0.5;
+    }
+    
+    .drop-zone .draggable {
+        position: static;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
     }
 
     .draggable.correct {
@@ -176,68 +198,68 @@
       pointer-events: none;
       z-index: 9999;
     }
-.nav-buttons {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  max-width: 900px;
-  margin-bottom: 20px;
-  gap: 20px;
-}
+    .nav-buttons {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      max-width: 900px;
+      margin-bottom: 20px;
+      gap: 20px;
+    }
 
-.nav-btn {
-  flex: 1;
-  max-width: 180px;
-  padding: 14px 20px;
-  border: none;
-  border-radius: 50px;
-  font-size: 16px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-  background: linear-gradient(135deg, #3498db, #2980b9);
-  color: white;
-  text-align: center;
-}
+    .nav-btn {
+      flex: 1;
+      max-width: 180px;
+      padding: 14px 20px;
+      border: none;
+      border-radius: 50px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      background: linear-gradient(135deg, #3498db, #2980b9);
+      color: white;
+      text-align: center;
+    }
 
-.nav-btn:hover {
-  transform: translateY(-5px) scale(1.05);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-  background: linear-gradient(135deg, #2980b9, #3498db);
-}
+    .nav-btn:hover {
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+      background: linear-gradient(135deg, #2980b9, #3498db);
+    }
 
-.nav-btn:active {
-  transform: translateY(0) scale(0.98);
-}
+    .nav-btn:active {
+      transform: translateY(0) scale(0.98);
+    }
 
-.prev-btn {
-  background: linear-gradient(135deg, #e74c3c, #c0392b);
-}
+    .prev-btn {
+      background: linear-gradient(135deg, #e74c3c, #c0392b);
+    }
 
-.prev-btn:hover {
-  background: linear-gradient(135deg, #c0392b, #e74c3c);
-}
+    .prev-btn:hover {
+      background: linear-gradient(135deg, #c0392b, #e74c3c);
+    }
 
-.home-btn {
-  background: linear-gradient(135deg, #27ae60, #2ecc71);
-}
+    .home-btn {
+      background: linear-gradient(135deg, #27ae60, #2ecc71);
+    }
 
-.home-btn:hover {
-  background: linear-gradient(135deg, #2ecc71, #27ae60);
-}
+    .home-btn:hover {
+      background: linear-gradient(135deg, #2ecc71, #27ae60);
+    }
 
-/* Mobilde butonlar alt alta */
-@media (max-width: 600px) {
-  .nav-buttons {
-    flex-direction: column;
-    align-items: center;
-  }
+    /* Mobilde butonlar alt alta */
+    @media (max-width: 600px) {
+      .nav-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
 
-  .nav-btn {
-    max-width: 250px;
-  }
-}
+      .nav-btn {
+        max-width: 250px;
+      }
+    }
     @media (max-width: 768px) {
       .drop-zone {
         width: calc(50% - 10px);
@@ -262,31 +284,26 @@
 <body>
   <h1>🎬 Önce Videoyu İzle, Sonra Resimleri Sırala!</h1>
 
-  <!-- Video Bölümü -->
   <div id="video-section">
-  
-<div class="nav-buttons">
-  <button class="nav-btn prev-btn" onclick="window.location.href='3-2.html'">⬅ Önceki</button>
-  <button class="nav-btn home-btn" onclick="window.location.href='index.html'">Ana Sayfa 🏠</button>
-</div>
+    <div class="nav-buttons">
+      <button class="nav-btn prev-btn" onclick="window.location.href='3-2.html'">⬅ Önceki</button>
+      <button class="nav-btn home-btn" onclick="window.location.href='index.html'">Ana Sayfa 🏠</button>
+    </div>
     <div id="player"></div>
     <button id="continue-btn">▶️ Devam Et — Oyunu Başlat</button>
-	
   </div>
 
-  <!-- Oyun Bölümü -->
   <div id="game-section">
-  
-  
-<div class="nav-buttons">
-  <button class="nav-btn prev-btn" onclick="window.location.href='3-2.html'">⬅ Önceki</button>
-  <button class="nav-btn home-btn" onclick="window.location.href='index.html'">Ana Sayfa 🏠</button>
-</div>
-  
-  
-  
+    <div class="nav-buttons">
+      <button class="nav-btn prev-btn" onclick="window.location.href='3-2.html'">⬅ Önceki</button>
+      <button class="nav-btn home-btn" onclick="window.location.href='index.html'">Ana Sayfa 🏠</button>
+    </div>
+    
     <h2>🖼️ Resimleri 1'den 6'ya Doğru Sıraya Sürükle!</h2>
     
+    <div id="image-source-container" class="drop-zone-container">
+        </div>
+
     <div class="drop-zones">
       <div class="drop-zone" data-index="0">1. Sıra</div>
       <div class="drop-zone" data-index="1">2. Sıra</div>
@@ -304,13 +321,13 @@
     </div>
   </div>
 
-  <!-- YouTube API -->
   <script src="https://www.youtube.com/iframe_api"></script>
 
   <script>
     let player;
-    let draggableElements = [];
+    const draggableElements = [];
     const totalImages = 6;
+    const sourceContainer = document.getElementById('image-source-container');
 
     // ⚙️ BURAYA KENDİ VİDEO ID'Nİ KOY
     const VIDEO_ID = 'l7ZQusHzVBA'; // Örnek: Rick Astley - Never Gonna Give You Up
@@ -340,11 +357,10 @@
     function initGame() {
       createDraggables();
       setupDropZones();
-      shuffleImages();
+      shuffleImages(); // Başlangıçta karıştır
     }
 
     function createDraggables() {
-      draggableElements = [];
       for (let i = 1; i <= totalImages; i++) {
         const img = document.createElement('img');
         img.src = `${i}.jpg`;
@@ -353,13 +369,9 @@
         img.dataset.id = i - 1; // 0-indexed
         img.draggable = true;
 
-        // Rastgele başlangıç pozisyonu
-        const x = 50 + Math.random() * 300 - 150;
-        const y = 200 + Math.random() * 300;
-        img.style.left = `calc(50% + ${x}px)`;
-        img.style.top = `${y}px`;
-
-        document.body.appendChild(img);
+        // --- DEĞİŞTİRİLEN KISIM ---
+        // Rastgele pozisyon yerine, resimleri kaynak container'ına ekliyoruz.
+        sourceContainer.appendChild(img);
         draggableElements.push(img);
 
         // Sürükleme olayları
@@ -392,66 +404,63 @@
           const id = e.dataTransfer.getData('text/plain');
           const draggable = document.querySelector(`.draggable[data-id="${id}"]`);
 
-          if (zone.children.length > 0) {
-            zone.removeChild(zone.children[0]);
+          // Eğer drop alanında başka bir resim varsa, onu kaynak alanına geri gönder
+          if (zone.children.length > 0 && zone.firstChild !== draggable) {
+             sourceContainer.appendChild(zone.firstChild);
           }
-
+          
           zone.appendChild(draggable);
-          draggable.style.position = 'static';
-          draggable.style.width = '100%';
-          draggable.style.height = 'auto';
-          draggable.style.transform = 'none';
-          draggable.style.boxShadow = '0 4px 12px rgba(0,0,0,0.3)';
         });
       });
     }
 
+    // --- DEĞİŞTİRİLEN FONKSİYON ---
     function shuffleImages() {
-      document.querySelectorAll('.drop-zone').forEach(zone => {
-        if (zone.children.length > 0) {
-          document.body.appendChild(zone.children[0]);
-        }
+      // 1. Tüm resimleri drop alanlarından alıp kaynak alanına geri taşı
+      document.querySelectorAll('.drop-zone .draggable').forEach(img => {
+          sourceContainer.appendChild(img);
+          img.classList.remove('correct');
       });
 
-      draggableElements.forEach(img => {
-        const x = 50 + Math.random() * 300 - 150; // -100 ile +200 arası
-        const y = 200 + Math.random() * 300;      // 200-500px arası
-
-        img.style.left = `calc(50% + ${x}px)`;
-        img.style.top = `${y}px`;
-        img.style.position = 'absolute';
-        img.style.transform = 'none';        // 👈 BÜYÜMEYİ ÖNLE!
-        img.style.width = '160px';           // 👈 Sabit boyut
-        img.style.maxWidth = '160px';        // 👈 Taşmayı engelle
-        img.classList.remove('correct');     // 👈 Doğru işareti temizlensin
-      });
-
+      // 2. Kaynak alanındaki resimleri karıştır
+      const imagesToShuffle = Array.from(sourceContainer.children);
+      imagesToShuffle.sort(() => Math.random() - 0.5);
+      imagesToShuffle.forEach(img => sourceContainer.appendChild(img));
+      
       document.getElementById('result').innerText = '';
     }
+
 
     document.getElementById('shuffle-btn').addEventListener('click', shuffleImages);
 
     document.getElementById('check-btn').addEventListener('click', () => {
-      const zones = document.querySelectorAll('.drop-zone');
-      let correct = true;
+      const zones = document.querySelectorAll('.drop-zones .drop-zone');
+      let allCorrect = true;
+      let filledZones = 0;
 
       zones.forEach((zone, index) => {
         const img = zone.querySelector('.draggable');
         if (img) {
+            filledZones++;
           const imgIndex = parseInt(img.dataset.id);
           if (imgIndex === index) {
             img.classList.add('correct');
           } else {
             img.classList.remove('correct');
-            correct = false;
+            allCorrect = false;
           }
         } else {
-          correct = false;
+            allCorrect = false; // Boş alan varsa, sıralama tamamlanmamıştır.
         }
       });
+      
+      // Tüm alanların dolu olup olmadığını kontrol et
+      if (filledZones < totalImages) {
+          allCorrect = false;
+      }
 
       const resultDiv = document.getElementById('result');
-      if (correct) {
+      if (allCorrect) {
         resultDiv.innerText = '🎉 TEBRİKLER! Tüm resimleri doğru sıraya koydun!';
         resultDiv.style.color = '#00ff88';
         launchConfetti();
